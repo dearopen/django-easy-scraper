@@ -1,3 +1,3 @@
-# Django APO to scrape web page
+## Full featured djaggo scraping framework to crawl website automatically
 
-Documentation will be added later
+Documentation comming soon.
