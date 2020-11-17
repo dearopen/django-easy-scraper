@@ -23,7 +23,7 @@ class Scraper(object):
         for field, pattern in self.regex_fields.items():
             result = re.findall(pattern, content)
             if len(result) == 0:
-                scrapped[field] = ''
+                raise LookupError(field)
             else:
                 scrapped[field] = result[0]
 
