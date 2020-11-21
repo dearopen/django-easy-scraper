@@ -2,7 +2,7 @@ import re
 
 
 def get_domain_name(url):
-    domain_name_pat = re.compile(r'www\.([\w\d\s\-\.]+)\/')
+    domain_name_pat = re.compile(r'.*\://(?:www.)?([^\/]+)')
     extract = domain_name_pat.findall(url)
 
     if len(extract) == 0:
