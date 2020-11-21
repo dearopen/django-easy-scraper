@@ -6,7 +6,7 @@ def get_domain_name(url):
     extract = domain_name_pat.findall(url)
 
     if len(extract) == 0:
-        raise ValueError
+        raise ValueError("Invalid domain name !! We couldn't parse domain name from your given url")
     else:
         return extract[0]
 
