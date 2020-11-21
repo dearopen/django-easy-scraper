@@ -10,7 +10,7 @@ def get_page_content(url):
 
 class Scraper(object):
     """
-    regex_fields will take these following items - 
+    regex_fields will take following items - 
         fields_name: '<regex pattern>'
     """
     regex_fields = {}
