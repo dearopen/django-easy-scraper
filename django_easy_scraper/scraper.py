@@ -10,20 +10,23 @@ def get_page_content(url):
 
 class Scraper(object):
     """
-    egex_fields will take these following items - 
+    regex_fields will take these following items - 
         fields_name: '<regex pattern>'
     """
     regex_fields = {}
 
     @classmethod
-    def regex_url_scraper(self, url):
+    def regex_url_scraper(self, url, raise_exception=False):
         content = get_page_content(url)
 
         scrapped = {}
         for field, pattern in self.regex_fields.items():
             result = re.findall(pattern, content)
             if len(result) == 0:
-                raise LookupError(field)
+                if raise_exception:
+                    raise LookupError(field)
+                else:
+                    scrapped[field] = ''
             else:
                 scrapped[field] = result[0]
 

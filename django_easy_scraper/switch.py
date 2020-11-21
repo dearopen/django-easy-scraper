@@ -23,10 +23,10 @@ class BaseSwitch(object):
     switcher = {}
 
     @classmethod
-    def get_data(self, url):
+    def get_data(self, url, raise_exception=False):
         domain = get_domain_name(url)
 
         if not domain in self.switcher:
             raise NotImplementedError(url)
-        return self.switcher.get(domain)(url)
+        return self.switcher.get(domain)(url, raise_exception)
 
