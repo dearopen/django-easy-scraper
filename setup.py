@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="django-easy-scraper",
-    version="1.0.0",
+    version="1.0.1",
     author="dearopen",
     author_email="",
     description="Dango app to scrape web page",

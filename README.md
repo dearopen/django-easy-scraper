@@ -41,25 +41,25 @@ and the response should look like this if your regex pattern are correct:
 
 `regex_url_scraper` method always gives you json response,
 
-So if you add many regex pattern in `regex_fields`, it will give you response that number of json key with result that you added in that fields.
+So if you add many regex pattern in `regex_fields`, it will give you response that number of dictionary key with result that you added in that dictionary.
 
 
 # Multiple Sites Scraping together
 
 You don't need to call different method for different site all the time !! Just call once and scrape all, something fun, right?
 
-### Like you are gonna scrape four sites:
+### Like you are gonna scrape three sites:
 > www.example.com
 
-> www.amazonxsite.com
+> www.exampletwo.com
 
-> www.newyorktimesnoexist.com
+> www.examplethree.com
 
-> www.walmaaaart.com
 
-But how will those site product scrape automatically, curious ? 
 
-- Wirte Regex patter for all above site and fields/data you want:
+But how will those site product scrape automatically, it scares you ? 
+
+- Wirte Regex pattern for all above site with the fields that you want to scrape:
 
 
 ```
@@ -72,37 +72,31 @@ class ScrapeExampleDotCom(scraper.Scraper):
         # Like above way you can add as much fields/keys as you want
     }
 
-class ScrapeAmazonxSite(scraper.Scraper):
+class ScrapeExampleTwo(scraper.Scraper):
     regex_fields = {
         'price': "Write Your Regex pattern for price here",
         'title': "Write your regex pattern for title here",
         # Like above way you can add as much fields/keys as you want
     }
 
-class ScrapeNewYorkTimeNoExist(scraper.Scraper):
+class ScrapeExampleThree(scraper.Scraper):
     regex_fields = {
         'price': "Write Your Regex pattern for price here",
         'title': "Write your regex pattern for title here",
         # Like above way you can add as much fields/keys as you want
     }
 
-class ScrapeWalmaaartDotCom(scraper.Scraper):
-    regex_fields = {
-        'price': "Write Your Regex pattern for price here",
-        'title': "Write your regex pattern for title here",
-        # Like above way you can add as much fields/keys as you want
-    }
 
 ```
 
 
 You have written regular expression for you all the site you are gonna scrape,
 
-Now it's time use your `Switch` class that will route your script/class based on the site you are gonna scrape? It's complex? No !!
+Now it's time use our `Switch` class that will route your script/class based on the site you are gonna scrape? Cool, right ? !!
 
-Here where the magic begins:
+It's where the magic really begins:
 
-Just place all your class in the dict.
+Just place all your class in the dictionary `switcher`.
 
 
 > Important Note:
@@ -115,17 +109,16 @@ from django_easy_scraper import switch
 
 class Switch(switch.BaseSwitch):
     switcher = {
-        'amazonxsite.com': ScrapeElgiganten.regex_url_scraper,
-        'amazonxsite.com': ScrapeAmazonxSite.regex_url_scraper,
-        'newyorktimesnoexist.com': ScrapeNewYorkTimeNoExist.regex_url_scraper,
-        'walmaaaart.com': ScrapeWalmaaartDotCom.regex_url_scraper,
+        'example.com': ScrapeExampleDotCom.regex_url_scraper,
+        'exampletwo.com': ScrapeExampleTwo.regex_url_scraper,
+        'examplethree.com': ScrapeExampleThree.regex_url_scraper,
     }
 
 ```
 
 So you have done routing your script/class based on the url it gets.
 
-### Get response data as json like above site:
+### Get response data as python dictionary like above site:
 
 ```
 url = 'Any of site you have written class for the site and added in switch class'
@@ -136,7 +129,9 @@ print(response) # Will give you an object of data that you trying to scrape
 
 ```
 
-Switch class is giving you facilities to route your scraping class automacally based whatever site link pass to it's method.
+Switch class is giving you facilities to route your scraping class automacally based whatever site link pass to it's `get_data` method.
+
+`get_data` method's `raise_exception` is it handle if you want to raise excepiton when your expected fields not found
 
 
 ### Got an issue ?
