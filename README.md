@@ -1,6 +1,6 @@
 # Django Easy Scraper
 
-An standalone django app that can be used/intigrated with both django and no-django application easily. the scraping mechanism is fully based on `Regular Expression` but you can extends based on what you are familiar with very easily.
+An standalone django app that can be used/intigrated with both django and no-django application easily. the scraping mechanism is  on `Regular Expression` and `xpath` which is mean you can use what you are familiar with very easily.
 
 It requires to install python `requests` modules
 
@@ -11,6 +11,7 @@ It requires to install python `requests` modules
 
 ## Basic Uses
 
+if you use regex:
 ```
 from django_easy_scraper import scraper
 
@@ -23,6 +24,22 @@ class ScrapeExampleDotCom(scraper.Scraper):
     }
 
 ```
+
+if you use xpath:
+
+```
+from django_easy_scraper import scraper
+
+class ScrapeExampleDotCom(scraper.Scraper):
+
+    xpath_fields = {
+        'price': "Write Your xpath pattern for price here",
+        'title': "Write your xpath pattern for title here",
+        # Like above way you can add as much fields/keys as you want
+    }
+
+```
+
 
 ### Scrape now
 ```
@@ -115,6 +132,8 @@ class Switch(switch.BaseSwitch):
     }
 
 ```
+
+> If you use xpath, you have pass `xpath_scraper` instead of `regex_url_scraper`
 
 So you have done routing your script/class based on the url it gets.
 
