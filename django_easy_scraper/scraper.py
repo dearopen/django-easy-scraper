@@ -27,6 +27,9 @@ class Scraper(object):
 
     @classmethod
     def regex_url_scraper(self, url, raise_exception=False):
+        if not self.regex_fields:
+            raise ValueError("regex_fields dictionary can't remain blank if you use regex_url_scraper()")
+
         content = get_page_content(url)
 
         scrapped = {}
@@ -45,6 +48,8 @@ class Scraper(object):
 
     @classmethod
     def xpath_scraper(self, url, raise_exception=False):
+        if not self.xpath_fields:
+            raise ValueError("xpath_fields dictionary can't remain blank if you use xpath_scrape()")
         content = get_page_content(url)
 
         tree = html.fromstring(content)
